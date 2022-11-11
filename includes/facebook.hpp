@@ -1,5 +1,5 @@
-#ifndef ILLINI_BOOK_HPP
-#define ILLINI_BOOK_HPP
+#ifndef FACEBOOK_HPP
+#define FACEBOOK_HPP
 
 #include <fstream>
 #include <list>

@@ -1,6 +1,6 @@
-CXX=clang++-10
+
 INCLUDES=-Iincludes/
-CXX_FLAGS=-std=c++20 -Wall -Wextra -Werror -pedantic $(INCLUDES)
+CXX_FLAGS=-std=c++20 $(INCLUDES)
 
 exec: bin/exec
 
