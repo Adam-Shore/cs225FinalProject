@@ -8,6 +8,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <iostream>
 using namespace std;
 
 class Facebook
@@ -15,7 +16,8 @@ class Facebook
     public:
     //constructor 
     Facebook(const std::string& connections);
-    std::vector<std::string> Breakln(const std::string& str, char delimiter);
+    std::vector<std::string> GetSub(const std::string& str, char delimiter);
+    void DisplayOut();
 
 
 
