@@ -5,24 +5,20 @@
 #include <set>
 #include <string>
 #include <vector>
-#include "AdjacencyMatrix.h"
 
 class AdjacencyMatrix
 {
     public:
-        struct LinkedListNode {
-            LinkedListNode* next;
-            int v;
-        };
-
-        struct AdjacencyList {
-            int vertex;
-            LinkedListNode* edges;
-        };
-
         struct Graph {
-            AdjacencyList* adjLists;
+            bool** adjMatrix;
             int n;
+        };
+        struct Vertex {
+            string v;
+        };
+        struct Edge {
+            Vertex source;
+            Vertex dest;
         };
 
         void addVertex(int v);
@@ -35,9 +31,9 @@ class AdjacencyMatrix
         
 
     private:
-        //graph
-        //vector of edges
-        //vector of vertices
+        Graph g_;
+        vector<Vertex> vertices_;
+        vector<Edge> edges_;
 
 
 };
