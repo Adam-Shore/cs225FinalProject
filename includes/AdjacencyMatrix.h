@@ -1,3 +1,5 @@
+#pragma once
+
 #include <fstream>
 #include <list>
 #include <map>
@@ -38,3 +40,4 @@ class AdjacencyMatrix
 
 };
 
+#endif
