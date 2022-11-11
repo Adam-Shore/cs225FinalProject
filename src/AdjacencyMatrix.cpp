@@ -1,4 +1,3 @@
-#pragma once
 
 #include <fstream>
 #include <list>
@@ -18,7 +17,7 @@ void AdjacencyMatrix::removeVertex(){
 }
 
 void AdjacencyMatrix::addEdge(Graph* g, int src, int dest){
-
+    g->adjMatrix[src][dest] = true;
 }
 
 void AdjacencyMatrix::removeEdge(Graph* g, int src, int dest){
@@ -26,15 +25,28 @@ void AdjacencyMatrix::removeEdge(Graph* g, int src, int dest){
 }
 
 bool AdjacencyMatrix::containsEdge(Graph const * const g, int src, int dest){
-    return true;
+    if(g->adjMatrix[src][dest]){
+        return true;
+    }
+    return false;
 }
 
 int AdjacencyMatrix::numOutgoingEdges(Graph const * const g, int v){
-    return 0;
+    int out = 0;
+    for (int i = 0; i < g->n; i++) {
+        if (g->adjMatrix[v][i]){
+            out++;
+        }
+    }
+    return out;
 }
 
 int AdjacencyMatrix::numIncomingEdges(Graph const * const g, int v){
-    return 0;
+    int out = 0;
+    for (int i = 0; i < g->n; i++) {
+        if (g->adjMatrix[i][v]){
+            out++;
+        }
+    }
+    return out;
 }
-
-#endif
