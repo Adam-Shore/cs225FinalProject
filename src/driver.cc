@@ -1,3 +1,7 @@
+
+
+using namespace std;
+
 #include <iostream>
 #include "facebook.hpp"
 
@@ -10,4 +14,5 @@ int main(int argc, char *argv[])
     return -1;
     Facebook f("http://snap.stanford.edu/data/ego-Facebook.html");
     f.DisplayOut();
+
 }
