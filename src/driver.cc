@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     cout << "hello" << endl;
     return -1;
-    Facebook f("http://snap.stanford.edu/data/ego-Facebook.html");
+    Facebook f("/Users/eikav/OneDrive/Desktop/CS225FinalProj/cs225FinalProject/data/FacebookDataset.txt");
     f.DisplayOut();
 
 }
