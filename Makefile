@@ -4,7 +4,7 @@ CXX_FLAGS=-std=c++20 $(INCLUDES)
 
 exec: bin/exec
 
-bin/exec: src/driver.cc src/facebook.cc
+bin/exec: src/driver.cc src/facebook.cc src/AdjacencyMatrix.cc
 	${CXX} ${CXX_FLAGS} $^ -o $@
 
 

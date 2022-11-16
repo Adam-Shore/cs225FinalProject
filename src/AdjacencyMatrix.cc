@@ -5,19 +5,26 @@
 #include <set>
 #include <string>
 #include <vector>
-#include "AdjacencyMatrix.h"
+#include "AdjacencyMatrix.hpp"
+#include "facebook.hpp"
 #include <cmath>
 #include <iostream>
 
-AdjacencyMatrix::AdjacencyMatrix()
+using namespace std;
+
+AdjacencyMatrix::AdjacencyMatrix(const std::string &connections)
 {
-    std::vector<std::vector<int>> data = getAV();
+    Facebook fb(connections);
+    std::vector<std::vector<int>> data = fb.getAV();
     int max = 0;
     for (int i = 0; i < data.size(); i++)
     {
         for (int j = 0; j < data.at(i).size(); j++)
         {
-            max = std::max(max, data.at(i).at(j));
+            if (max < data.at(i).at(j))
+            {
+                max = data.at(i).at(j);
+            }
         }
     }
 
@@ -30,15 +37,17 @@ AdjacencyMatrix::AdjacencyMatrix()
             g_.adjMatrix.at(i).push_back(false);
         }
     }
+    cout << "height: " << g_.adjMatrix.size() << "width: " << g_.adjMatrix.at(0).size() << endl;
 
     for (int i = 0; i < data.size(); i++)
     {
-        for (int j = 0; j < data.at(i).size(); j++)
-        {
-            g_.adjMatrix.at(i).at(j) = true;
-            g_.adjMatrix.at(j).at(i) = true;
-        }
+
+        g_.adjMatrix.at(data.at(i).at(0)).at(data.at(i).at(1)) = true;
+        g_.adjMatrix.at(data.at(i).at(1)).at(data.at(i).at(0)) = true;
     }
+}
+AdjacencyMatrix::AdjacencyMatrix()
+{
 }
 
 void AdjacencyMatrix::addEdge(Graph *g, int src, int dest)
@@ -46,11 +55,21 @@ void AdjacencyMatrix::addEdge(Graph *g, int src, int dest)
     g_.adjMatrix[src][dest] = true;
 }
 
-void AdjacencyMatrix::removeEdge(Graph *g, int src, int dest)
+/*void AdjacencyMatrix::removeEdge(Graph *g, int src, int dest)
 {
 }
+*/
 
-bool AdjacencyMatrix::containsEdge(Graph const *const g, int src, int dest)
+void AdjacencyMatrix::DisplayOut()
+{
+    for (int i = 0; i < g_.adjMatrix.size(); i++)
+    {
+        for (int j = 0; j < g_.adjMatrix[i].size(); j++)
+            cout << g_.adjMatrix[i][j] << " ";
+        cout << '\n';
+    }
+}
+/*bool AdjacencyMatrix::containsEdge(Graph const *const g, int src, int dest)
 {
     if (g_.adjMatrix[src][dest])
     {
@@ -58,6 +77,7 @@ bool AdjacencyMatrix::containsEdge(Graph const *const g, int src, int dest)
     }
     return false;
 }
+
 
 int AdjacencyMatrix::numOutgoingEdges(Graph const *const g, int v)
 {
@@ -84,6 +104,7 @@ int AdjacencyMatrix::numIncomingEdges(Graph const *const g, int v)
     }
     return out;
 }
+*/
 
 void AdjacencyMatrix::bfs(int begin, string fname)
 {

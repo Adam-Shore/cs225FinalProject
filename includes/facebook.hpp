@@ -16,9 +16,6 @@ class Facebook
 public:
     // constructor
     Facebook();
-
-public:
-    // constructor
     Facebook(const std::string &connections);
     std::vector<int> GetSub(const std::string &str, char delimiter);
     void DisplayOut();
