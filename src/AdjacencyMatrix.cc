@@ -17,6 +17,7 @@ AdjacencyMatrix::AdjacencyMatrix(const std::string &connections)
     Facebook fb(connections);
     std::vector<std::vector<int>> data = fb.getAV();
     int max = 0;
+    
     for (int i = 0; i < data.size(); i++)
     {
         for (int j = 0; j < data.at(i).size(); j++)
@@ -27,7 +28,7 @@ AdjacencyMatrix::AdjacencyMatrix(const std::string &connections)
             }
         }
     }
-
+    
     for (int i = 0; i <= max; i++)
     {
         vector<bool> b;
@@ -38,13 +39,14 @@ AdjacencyMatrix::AdjacencyMatrix(const std::string &connections)
         }
     }
     cout << "height: " << g_.adjMatrix.size() << "width: " << g_.adjMatrix.at(0).size() << endl;
-
+    
     for (int i = 0; i < data.size(); i++)
     {
 
         g_.adjMatrix.at(data.at(i).at(0)).at(data.at(i).at(1)) = true;
         g_.adjMatrix.at(data.at(i).at(1)).at(data.at(i).at(0)) = true;
     }
+    
 }
 AdjacencyMatrix::AdjacencyMatrix()
 {
