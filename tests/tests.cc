@@ -11,7 +11,7 @@
 TEST_CASE("A test case", "[case-1-data]") {  //correct size means data is read in correctly to correctly build a n*2 vector(shape of file)
     string connections = "tests/TestData.txt";
     Facebook fb(connections);
-    REQUIRE(fb.getAV().size() == 9);
+    REQUIRE(fb.getAV().size() == 11);
     REQUIRE(fb.getAV().at(1).size() == 2);   
 }
 
@@ -46,6 +46,8 @@ TEST_CASE("Test dijkstras", "[case-3-data]") {  //vector has correct distance fr
     REQUIRE(output.at(2) == 1);
     REQUIRE(output.at(3) == 1);
     REQUIRE(output.at(4) == 1);
+    REQUIRE(output.at(5) == 2);
+    REQUIRE(output.at(6) == 3);
  
 
 }
