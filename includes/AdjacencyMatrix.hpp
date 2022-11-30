@@ -38,6 +38,7 @@ public:
     // int numOutgoingEdges(Graph const *const g, int v);
     // int numIncomingEdges(Graph const *const g, int v);
     void bfs(int begin, string fname);
+    std::vector<int> dijkstras(Graph g, Vertex src);
     AdjacencyMatrix(const std::string &connections);
 
 private:

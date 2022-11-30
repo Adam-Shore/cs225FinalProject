@@ -9,6 +9,7 @@
 #include "facebook.hpp"
 #include <cmath>
 #include <iostream>
+#include <limits.h>
 
 using namespace std;
 
@@ -140,4 +141,35 @@ void AdjacencyMatrix::bfs(int begin, string fname)
             // this means that you visited the node
         }
     }
+}
+
+
+std::vector<int> AdjacencyMatrix::dijkstras(Graph g, Vertex src)
+{
+    std::vector<int> ret;
+    bool sptSet[g.at(0).size()];
+    for(int i = 0; i < g.at(0).size(); i++){
+        ret[i] = INT_MAX;
+        sptSet[i] = false;
+    }
+    ret[src.v] = 0;
+    for(int a = 0; g.at(0).size()-1){
+        int min = INT_MAX;
+        int min_index;
+        for(int v = 0; v < g.at(0).size(); v++){
+            if(sptSet[v] == false && ret[v] <= min){
+                min = ret[v];
+                min_index = v;
+            }
+        }
+        sptSet[min_index] = true;
+        for (int z = 0; z < V; z++){
+            if (!sptSet[z] && g[min_index][z]>0 && ret[min_index] != INT_MAX && ret[min_index] + g[min_index][z] < ret[z]){
+                ret[z] = ret[min_index] + g[min_index][z];
+            }
+        }
+
+    }
+    return ret;
+
 }
