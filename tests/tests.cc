@@ -16,7 +16,7 @@ TEST_CASE("A test case", "[case-1-data]") {  //correct size means data is read i
 }
 
 
-TEST_CASE("A test case", "[case-2-data]") {  //correctly parsing file and reading in data into array
+TEST_CASE("A test case 2", "[case-2-data]") {  //correctly parsing file and reading in data into array
     string connections = "tests/TestData.txt";
     Facebook fb(connections);
     REQUIRE(fb.getAV().at(5).at(0) == 3);  
@@ -24,7 +24,7 @@ TEST_CASE("A test case", "[case-2-data]") {  //correctly parsing file and readin
     REQUIRE(fb.getAV().at(1).at(0) == 0); 
 }
 
-TEST_CASE("A test case", "[case-3-data]") {  //vector in each row is properly being filled
+TEST_CASE("A test case 3", "[case-3-data]") {  //vector in each row is properly being filled
     string connections = "tests/TestData.txt";
     Facebook fb(connections);
     REQUIRE(fb.GetSub("2 4", ' ').at(0) == 2);  
