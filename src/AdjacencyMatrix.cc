@@ -176,3 +176,12 @@ std::vector<int> AdjacencyMatrix::dijkstras(Graph g, Vertex src)
 AdjacencyMatrix::Graph AdjacencyMatrix::getGraph() {
     return g_;
 }
+vector<double> AdjacencyMatrix::pageRank(int iters=100, double dampfact = 0.85) {
+    vector<double> ranks;
+    
+
+
+
+
+    return ranks;
+}

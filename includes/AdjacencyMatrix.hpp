@@ -38,14 +38,15 @@ public:
     // int numOutgoingEdges(Graph const *const g, int v);
     // int numIncomingEdges(Graph const *const g, int v);
     void bfs(int begin, string fname);
-    std::vector<int> dijkstras(Graph g, Vertex src);
+    vector<int> dijkstras(Graph g, Vertex src);
+    vector<double> pageRank(int iters = 100, double dampfact = 0.85);
     AdjacencyMatrix(const std::string &connections);
     Graph getGraph();
 
 private:
     Graph g_;
-    std::vector<Vertex> vertices_;
-    std::vector<Edge> edges_;
+    vector<Vertex> vertices_;
+    vector<Edge> edges_;
     // Facebook fb;
 };
 #endif

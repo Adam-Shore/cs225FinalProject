@@ -46,6 +46,6 @@ TEST_CASE("Test dijkstras", "[case-3-data]") {  //vector has correct distance fr
     REQUIRE(output.at(2) == 1);
     REQUIRE(output.at(3) == 1);
     REQUIRE(output.at(4) == 1);
-
+ 
 
 }
