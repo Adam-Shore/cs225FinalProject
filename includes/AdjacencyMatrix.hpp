@@ -18,7 +18,7 @@ class AdjacencyMatrix
 public:
     struct Graph
     {
-        std::vector<std::vector<bool>> adjMatrix; // true of there exists an edge between matrices
+        std::vector<std::vector<bool> > adjMatrix; // true of there exists an edge between matrices
         int n;                                    // length of rows and columns
     };
     struct Vertex
@@ -40,6 +40,7 @@ public:
     void bfs(int begin, string fname);
     std::vector<int> dijkstras(Graph g, Vertex src);
     AdjacencyMatrix(const std::string &connections);
+    Graph getGraph();
 
 private:
     Graph g_;

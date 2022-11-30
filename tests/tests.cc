@@ -8,7 +8,7 @@
 #include "AdjacencyMatrix.hpp"
 #include <string>
 
-TEST_CASE("A test case", "[case-1-data]") {  //correct size means data is read in correctly to corrreclty build a n*2 vector(shape of file)
+TEST_CASE("A test case", "[case-1-data]") {  //correct size means data is read in correctly to correctly build a n*2 vector(shape of file)
     string connections = "tests/TestData.txt";
     Facebook fb(connections);
     REQUIRE(fb.getAV().size() == 9);
@@ -29,4 +29,23 @@ TEST_CASE("A test case 3", "[case-3-data]") {  //vector in each row is properly 
     Facebook fb(connections);
     REQUIRE(fb.GetSub("2 4", ' ').at(0) == 2);  
     REQUIRE(fb.GetSub("2 4", ' ').at(1) == 4);  
+}
+
+TEST_CASE("Test dijkstras", "[case-3-data]") {  //vector has correct distance from source 
+
+    vector<int> correct;
+    AdjacencyMatrix::Vertex src;
+    src.v = 0;
+
+    AdjacencyMatrix AM("tests/TestData.txt");
+
+    vector<int> output = AM.dijkstras(AM.getGraph(), src);
+
+    REQUIRE(output.at(0) == 0);
+    REQUIRE(output.at(1) == 1);
+    REQUIRE(output.at(2) == 1);
+    REQUIRE(output.at(3) == 1);
+    REQUIRE(output.at(4) == 1);
+
+
 }

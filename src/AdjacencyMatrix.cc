@@ -169,7 +169,10 @@ std::vector<int> AdjacencyMatrix::dijkstras(Graph g, Vertex src)
             }
         }
 
-    }
+    } 
     return ret;
 
+}
+AdjacencyMatrix::Graph AdjacencyMatrix::getGraph() {
+    return g_;
 }
