@@ -51,3 +51,16 @@ TEST_CASE("Test dijkstras", "[case-3-data]") {  //vector has correct distance fr
  
 
 }
+
+TEST_CASE("Test pagerank", "[case-4-data]") {  //vector has correct distance from source 
+    vector<double> correct;
+    AdjacencyMatrix AM("tests/TestData.txt");
+
+
+
+    correct = AM.pageRank(100, 0.85);
+
+
+ 
+
+}

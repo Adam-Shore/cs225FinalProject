@@ -42,7 +42,7 @@ public:
     vector<double> pageRank(int iters = 100, double dampfact = 0.85);
     AdjacencyMatrix(const std::string &connections);
     Graph getGraph();
-
+    vector<double> multArr(vector<double> ranks, vector<vector<double> > M_hat);
 private:
     Graph g_;
     vector<Vertex> vertices_;

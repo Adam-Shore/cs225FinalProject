@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     f.DisplayOut();
     // cout << "hello" << endl;
     */
-    Facebook f("data/FacebookDataset.txt");
+    //Facebook f("data/FacebookDataset.txt");
     //cout << f.GetSub("13 4", ' ').at(0) << endl;
     //cout << f.GetSub("13 4", ' ').at(0) << endl;
     //cout << f.GetSub("13 4", ' ').at(0) << endl;
@@ -23,8 +23,19 @@ int main(int argc, char *argv[])
     // cout << f.getAV().size() << endl;
     // cout << f.getAV().at(0).size() << endl;
 
-    AdjacencyMatrix adj("data/FacebookDataset.txt");
-    adj.DisplayOut();
+    //AdjacencyMatrix adj("data/FacebookDataset.txt");
+    //adj.DisplayOut();
+
+    vector<double> correct;
+    AdjacencyMatrix AM("tests/TestData.txt");
+
+
+
+    correct = AM.pageRank(100, 0.85);
+
+    for (auto i : correct) {
+        std::cout << i << '\n';
+    }
 
     return 0;
 }
