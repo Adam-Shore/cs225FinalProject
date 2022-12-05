@@ -11,7 +11,7 @@
 TEST_CASE("A test case", "[case-1-data]") {  //correct size means data is read in correctly to correctly build a n*2 vector(shape of file)
     string connections = "tests/TestData.txt";
     Facebook fb(connections);
-    REQUIRE(fb.getAV().size() == 11);
+    REQUIRE(fb.getAV().size() == 15);
     REQUIRE(fb.getAV().at(1).size() == 2);   
 }
 
@@ -19,10 +19,11 @@ TEST_CASE("A test case", "[case-1-data]") {  //correct size means data is read i
 TEST_CASE("A test case 2", "[case-2-data]") {  //correctly parsing file and reading in data into array
     string connections = "tests/TestData.txt";
     Facebook fb(connections);
-    REQUIRE(fb.getAV().at(5).at(0) == 3);  
+    REQUIRE(fb.getAV().at(5).at(0) == 0);  
     REQUIRE(fb.getAV().at(3).at(1) == 4); 
     REQUIRE(fb.getAV().at(1).at(0) == 0); 
 }
+
 
 TEST_CASE("A test case 3", "[case-3-data]") {  //vector in each row is properly being filled
     string connections = "tests/TestData.txt";
@@ -59,6 +60,17 @@ TEST_CASE("Test pagerank", "[case-4-data]") {  //vector has correct distance fro
 
 
     correct = AM.pageRank(100, 0.85);
+    double highest = 0;
+    double highest_idx = 0;
+
+    for (unsigned i = 0; i < correct.size(); i++) {
+        if (correct.at(i) > highest) {
+            highest = correct.at(i);
+            highest_idx = i;
+        }
+    }
+
+    REQUIRE(highest_idx == 0);
 
 
  

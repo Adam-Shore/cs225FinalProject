@@ -185,22 +185,29 @@ vector<double> AdjacencyMatrix::pageRank(int iters, double dampfact) {
     for(size_t i =0; i < N; i++) {
         ranks.push_back(dist);
     }
+
     for (size_t i =0; i < g_.adjMatrix.size(); i ++) {
         vector<double> tmp;
         M_hat.push_back(tmp);
         for (size_t j =0; j < g_.adjMatrix.at(i).size(); j ++) {
-            M_hat.at(j).push_back(g_.adjMatrix.at(i).at(j)*dampfact+(1-dampfact)/N);
+            M_hat.at(i).push_back(g_.adjMatrix.at(i).at(j)*dampfact+(1-dampfact)/N);
         }
     }
-   
     for (int i =0; i < iters; i++) {
         ranks = multArr(ranks, M_hat);
     }
-
+    double tot = 0;
+    for (size_t i = 0; i < ranks.size(); i++) {
+        tot += ranks.at(i);
+    }
+    for (size_t i = 0; i < ranks.size(); i++) {
+        ranks.at(i) = ranks.at(i)/tot;
+    }
     return ranks;
 }
 vector<double> AdjacencyMatrix::multArr(vector<double> ranks, vector<vector<double>> M_hat) {
     vector<double> ret;
+    
     for (size_t i =0; i < M_hat.size(); i ++) {
         double tot = 0;
         for (size_t j =0; j < M_hat.at(i).size(); j ++) {
