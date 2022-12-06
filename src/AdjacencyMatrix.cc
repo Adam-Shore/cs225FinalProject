@@ -13,13 +13,13 @@
 
 using namespace std;
 
-AdjacencyMatrix::AdjacencyMatrix(const std::string &connections)
+AdjacencyMatrix::AdjacencyMatrix(const std::string &connections)  //created an adjacency matrix
 {
     Facebook fb(connections);
-    std::vector<std::vector<int>> data = fb.getAV();
+    std::vector<std::vector<int>> data = fb.getAV();  //data stores the 2d vector of data
     int max = 0;
     
-    for (int i = 0; i < data.size(); i++)
+    for (int i = 0; i < data.size(); i++)    //find the maximum node to determine number of iterations through dataset
     {
         for (int j = 0; j < data.at(i).size(); j++)
         {
@@ -30,18 +30,18 @@ AdjacencyMatrix::AdjacencyMatrix(const std::string &connections)
         }
     }
     
-    for (int i = 0; i <= max; i++)
+    for (int i = 0; i <= max; i++)  //fills adjacency matrix with 0(no connection) or 1(connection) and loops through the number of nodes 
     {
         vector<bool> b;
         g_.adjMatrix.push_back(b);
-        for (int j = 0; j <= max; j++)
+        for (int j = 0; j <= max; j++)   
         {
-            g_.adjMatrix.at(i).push_back(false);
+            g_.adjMatrix.at(i).push_back(false);  //initially fill all connections as false
         }
     }
     cout << "height: " << g_.adjMatrix.size() << "width: " << g_.adjMatrix.at(0).size() << endl;
     
-    for (int i = 0; i < data.size(); i++)
+    for (int i = 0; i < data.size(); i++)  //creates a connection between 2 nodes. Since undirected graph, if a connection is set btw nodes a and b, then connection must be set btw nodes b and a in adjacency matrix
     {
 
         g_.adjMatrix.at(data.at(i).at(0)).at(data.at(i).at(1)) = true;
@@ -49,11 +49,11 @@ AdjacencyMatrix::AdjacencyMatrix(const std::string &connections)
     }
     
 }
-AdjacencyMatrix::AdjacencyMatrix()
+AdjacencyMatrix::AdjacencyMatrix()  //empty constructor
 {
 }
 
-void AdjacencyMatrix::addEdge(Graph *g, int src, int dest)
+void AdjacencyMatrix::addEdge(Graph *g, int src, int dest)  //creates an edge between 2 nodes
 {
     g_.adjMatrix[src][dest] = true;
 }
@@ -63,7 +63,7 @@ void AdjacencyMatrix::addEdge(Graph *g, int src, int dest)
 }
 */
 
-void AdjacencyMatrix::DisplayOut()
+void AdjacencyMatrix::DisplayOut()   //print out contents of adjacency matrix
 {
     for (int i = 0; i < g_.adjMatrix.size(); i++)
     {
@@ -109,7 +109,7 @@ int AdjacencyMatrix::numIncomingEdges(Graph const *const g, int v)
 }
 */
 
-void AdjacencyMatrix::bfs(int begin, string fname)
+void AdjacencyMatrix::bfs(int begin, string fname) //used to search through a structure for a specified node
 {
     // vector<vector<int>> adj_vect_ = getAV();
     vector<bool> is_visited;
@@ -118,14 +118,14 @@ void AdjacencyMatrix::bfs(int begin, string fname)
     is_visited[begin] = true;
 
     int index = 0;
-    while (!qu.empty())
+    while (!qu.empty())  //bfs algoithm that continues to check each node and add to queue until queue is empty
     {
-        index = qu.front();
+        index = qu.front();  
         qu.pop();
 
         for (unsigned i = 0; i < g_.adjMatrix[index].size(); i++)
         {
-            if (g_.adjMatrix[index][i] == 1 && (!is_visited[i]))
+            if (g_.adjMatrix[index][i] == 1 && (!is_visited[i])) //this checks if the node you are on is not yet visitied, adds node to queue and marks node as visited
             {
                 qu.push(i);
                 is_visited[i] = true;
@@ -133,7 +133,7 @@ void AdjacencyMatrix::bfs(int begin, string fname)
         }
     }
     int counter = 0;
-    for (int i = 0; i < is_visited.size(); i++)
+    for (int i = 0; i < is_visited.size(); i++) // loop keeps track of the nodes that were already visited
     {
         if (is_visited[i] == 1)
         {

@@ -53,7 +53,7 @@ TEST_CASE("Test dijkstras", "[case-3-data]") {  //vector has correct distance fr
 
 }
 
-TEST_CASE("Test pagerank", "[case-4-data]") {  //vector has correct distance from source 
+TEST_CASE("Test pagerank", "[case-4-data]") {  //vector of ranks is created and most conected node is returned
     vector<double> correct;
     AdjacencyMatrix AM("tests/TestData.txt");
 
