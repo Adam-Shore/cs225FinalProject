@@ -27,9 +27,9 @@ int main(int argc, char *argv[])
     //adj.DisplayOut();
 
     vector<double> correct;
-    AdjacencyMatrix AM("tests/TestData.txt");
+    AdjacencyMatrix AM("data/FacebookDataset.txt");
 
-
+    //size_t hold = AM.bfs(0);
 
     correct = AM.pageRank(100, 0.85);
 

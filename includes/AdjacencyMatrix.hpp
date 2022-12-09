@@ -37,7 +37,7 @@ public:
     // bool containsEdge(Graph const *const g, int src, int dest);
     // int numOutgoingEdges(Graph const *const g, int v);
     // int numIncomingEdges(Graph const *const g, int v);
-    void bfs(int begin, string fname);
+    vector<bool> bfs(int begin);
     vector<int> dijkstras(Graph g, Vertex src);
     vector<double> pageRank(int iters = 100, double dampfact = 0.85);
     AdjacencyMatrix(const std::string &connections);

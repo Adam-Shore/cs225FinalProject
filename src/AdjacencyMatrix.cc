@@ -109,20 +109,24 @@ int AdjacencyMatrix::numIncomingEdges(Graph const *const g, int v)
 }
 */
 
-void AdjacencyMatrix::bfs(int begin, string fname) //used to search through a structure for a specified node
+vector<bool> AdjacencyMatrix::bfs(int begin) //used to search through a structure for a specified node
 {
     // vector<vector<int>> adj_vect_ = getAV();
     vector<bool> is_visited;
     queue<int> qu;
     qu.push(begin);
+    for(size_t i = 0; i < g_.adjMatrix.size(); i++) {
+        is_visited.push_back(false);
+    }
+
     is_visited[begin] = true;
 
     int index = 0;
+
     while (!qu.empty())  //bfs algoithm that continues to check each node and add to queue until queue is empty
     {
         index = qu.front();  
         qu.pop();
-
         for (unsigned i = 0; i < g_.adjMatrix[index].size(); i++)
         {
             if (g_.adjMatrix[index][i] == 1 && (!is_visited[i])) //this checks if the node you are on is not yet visitied, adds node to queue and marks node as visited
@@ -141,51 +145,61 @@ void AdjacencyMatrix::bfs(int begin, string fname) //used to search through a st
             // this means that you visited the node
         }
     }
+    return is_visited;
 }
 
-
+//perform dijkstras algorithm to find distances between a src and every other vertex where the index of the return
+ //vector is the  distance between the source and the vertex stored at that index in the graph
 std::vector<int> AdjacencyMatrix::dijkstras(Graph g, Vertex src)
 {
-    std::vector<int> ret;
-    bool visited[g.adjMatrix.at(0).size()];
-    for(int i = 0; i < g.adjMatrix.at(0).size(); i++){
+    std::vector<int> ret; // create return vector
+    bool visited[g.adjMatrix.at(0).size()];  //create vector to use in loop to track visited vertices
+    for(int i = 0; i < g.adjMatrix.at(0).size(); i++){ //loop sets every index of visited to false and sets distance to max for each index
         ret.push_back(INT_MAX);
         visited[i] = false;
     }
-    ret[src.v] = 0;
-    for(int a = 0; a < g.adjMatrix.at(0).size()-1; a++){
+    ret[src.v] = 0; //sets the return value of the source to itself to zero
+    for(int a = 0; a < g.adjMatrix.at(0).size()-1; a++){//loop through each row in graph
         int min = INT_MAX;
-        int min_index;
-        for(int v = 0; v < g.adjMatrix.at(0).size(); v++){
-            if(visited[v] == false && ret[v] <= min){
+        int min_index;//initialize int to track the minimum distance from current vertex
+        for(int v = 0; v < g.adjMatrix.at(0).size(); v++){//loop through each column in the row of the graph
+            if(visited[v] == false && ret[v] <= min){ //update the minimum index and value if not already visited and less than min
                 min = ret[v];
                 min_index = v;
             }
         }
-        visited[min_index] = true;
-        for (int z = 0; z < g.adjMatrix.at(0).size(); z++){
+        visited[min_index] = true; //set minimum index to true in visited vector
+        for (int z = 0; z < g.adjMatrix.at(0).size(); z++){ //loop through each row in graph
             if (!visited[z] && (int)g.adjMatrix[min_index][z]>0 && ret[min_index] != INT_MAX && ret[min_index] + (int)g.adjMatrix[min_index][z] < ret[z]){
-                ret[z] = ret[min_index] + (int)g.adjMatrix[min_index][z];
+                ret[z] = ret[min_index] + (int)g.adjMatrix[min_index][z]; //adds the distance to the return vector if conditions met
             }
         }
 
     } 
-    return ret;
+    return ret;//return the return vector
 
 }
+
+//getter function for the graph
 AdjacencyMatrix::Graph AdjacencyMatrix::getGraph() {
-    return g_;
+    return g_; //returns the graph
 }
+//function to return a vector which sums to one, with each index in the 
+//vector storing how popular the corresponding node is
+//parameters are number of iterations for the algorithm and the dampening factor
 vector<double> AdjacencyMatrix::pageRank(int iters, double dampfact) {
     
-    vector<double> ranks;
-    vector<vector<double>> M_hat;
-    size_t N = g_.adjMatrix.size();
-    double dist = 1.0 / N;
+    vector<double> ranks; //initializes return vector 
+    vector<vector<double>> M_hat; //matrix that when multiplied by the ranks matrix produces a new, more accurate ranks vector 
+    size_t N = g_.adjMatrix.size(); //size of adjacency matrix
+    double dist = 1.0 / N; 
+
+    //initializes values in ranks so that each proportion starts off as equal
     for(size_t i =0; i < N; i++) {
         ranks.push_back(dist);
     }
 
+    //Creates M_hat based on dampening factor
     for (size_t i =0; i < g_.adjMatrix.size(); i ++) {
         vector<double> tmp;
         M_hat.push_back(tmp);
@@ -193,9 +207,12 @@ vector<double> AdjacencyMatrix::pageRank(int iters, double dampfact) {
             M_hat.at(i).push_back(g_.adjMatrix.at(i).at(j)*dampfact+(1-dampfact)/N);
         }
     }
+
+    //multiply ranks and m_hat and update ranks iters times 
     for (int i =0; i < iters; i++) {
         ranks = multArr(ranks, M_hat);
     }
+    //make value in ranks a proportion which sums to 1
     double tot = 0;
     for (size_t i = 0; i < ranks.size(); i++) {
         tot += ranks.at(i);
@@ -203,11 +220,14 @@ vector<double> AdjacencyMatrix::pageRank(int iters, double dampfact) {
     for (size_t i = 0; i < ranks.size(); i++) {
         ranks.at(i) = ranks.at(i)/tot;
     }
+
+    //return a vector of the the proportion of connectedness of each vertex
     return ranks;
 }
+
+//helper function to multiply a N x N matrix by a N x 1 vector
 vector<double> AdjacencyMatrix::multArr(vector<double> ranks, vector<vector<double>> M_hat) {
-    vector<double> ret;
-    
+    vector<double> ret; //initialize return vector
     for (size_t i =0; i < M_hat.size(); i ++) {
         double tot = 0;
         for (size_t j =0; j < M_hat.at(i).size(); j ++) {
@@ -215,5 +235,6 @@ vector<double> AdjacencyMatrix::multArr(vector<double> ranks, vector<vector<doub
         }
         ret.push_back(tot);
     }
+    // returns a N x 1 vector
     return ret;
 }
