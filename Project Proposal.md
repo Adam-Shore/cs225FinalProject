@@ -29,7 +29,6 @@ We have determined that the runtime of BFS search is O(n) given the loops that w
 Timeline
 Plan project and create project proposal (week 1) Data acquisition (week 2) Data processing (week 2) Completion of each individual algorithm (week 3) Production of final deliverables (week 4)
 
-Github Organization: The main branch hosts all of the files for our project. The src folder contains the AdjacencyMatrix.cc file which contains code for the bfs, dijkstra's algorithm, and PageRank algorithm. the facebook.cc file reads in the Facebook dataset.
-
+Github Organization: The main branch hosts all of the files for our project. The src folder contains the AdjacencyMatrix.cc file which contains code to create the adjacency matrix, the bfs algorithm, dijkstra's algorithm, and PageRank algorithm. The Facebook.cc file has the code that reads in the dataset file and creates a vector to store all the data.
 
 Running Instructions: The code must be cloned from GitHub by typing the command git clone https://github.com/Adam-Shore/cs225FinalProject.git . The code can be executed by running the command make test or g++ -std=c++20 -Iincludes/ src/driver.cc src/facebook.cc src/AdjacencyMatrix.cc -o bin/tests. The next step is to run the command ./bin/tests which runs all test cases. The test case file contains test cases for the bfs algorithm, dijkstra's algorithm, and PageRank algorithm.
