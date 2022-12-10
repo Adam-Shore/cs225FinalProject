@@ -31,3 +31,6 @@ Github Organization: The main branch hosts all of the files for our project. The
 
 
 Running Instructions: The code must be cloned from GitHub by typing the command git clone https://github.com/Adam-Shore/cs225FinalProject.git . The code can be executed by running the command make test or g++ -std=c++20 -Iincludes/ src/driver.cc src/facebook.cc src/AdjacencyMatrix.cc -o bin/tests. The next step is to run the command ./bin/tests which runs all test cases. The test case file contains test cases for the bfs algorithm, dijkstra's algorithm, and PageRank algorithm.
+
+Link To Final Video:
+https://youtu.be/B_HmE5rEsGQ
